@@ -350,7 +350,15 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Ball.cs"
-"Assets/Scripts/NewBehaviourScript.cs"
+"Assets/Scripts/Camerawork.cs"
+"Assets/Scripts/Coin.cs"
+"Assets/Scripts/FailZone.cs"
+"Assets/Scripts/GameManager.cs"
+"Assets/Scripts/Ground.cs"
+"Assets/Scripts/Obstacle.cs"
+"Assets/Scripts/RedCoin.cs"
+"Assets/Scripts/Shooter.cs"
+"Assets/Scripts/Stone.cs"
 -langversion:9.0
 
 /deterministic
