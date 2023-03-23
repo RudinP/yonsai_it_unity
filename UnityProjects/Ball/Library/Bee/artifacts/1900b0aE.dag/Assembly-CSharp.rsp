@@ -354,10 +354,10 @@
 "Assets/Scripts/Coin.cs"
 "Assets/Scripts/FailZone.cs"
 "Assets/Scripts/GameManager.cs"
-"Assets/Scripts/Ground.cs"
 "Assets/Scripts/Obstacle.cs"
 "Assets/Scripts/RedCoin.cs"
 "Assets/Scripts/Shooter.cs"
+"Assets/Scripts/Stage.cs"
 "Assets/Scripts/Stone.cs"
 -langversion:9.0
 

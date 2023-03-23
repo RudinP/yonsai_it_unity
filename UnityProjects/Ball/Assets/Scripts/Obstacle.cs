@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    float delta = -10f;
+    static float speed = 10f;
+    float delta = speed;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -25,11 +26,11 @@ public class Obstacle : MonoBehaviour
         transform.localPosition = new Vector3(newXPosition, transform.localPosition.y, transform.localPosition.z);
         if (transform.localPosition.x < -3.5f)
         {
-            delta = 10f;
+            delta = speed;
         }
         else if (transform.localPosition.x > 3.5f)
         {
-            delta = -10f;
+            delta = -speed;
         }
     }
 }
