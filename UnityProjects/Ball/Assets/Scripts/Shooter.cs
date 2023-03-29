@@ -6,10 +6,12 @@ public class Shooter : MonoBehaviour
 {
     public GameObject stoneObj;
     float timeCount;
+    AudioSource shooterSource;
     // Start is called before the first frame update
     void Start()
     {
         timeCount = 0;
+        shooterSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,6 +21,7 @@ public class Shooter : MonoBehaviour
 
         if (timeCount > 3.0f) 
         {
+            shooterSource.Play();
             Instantiate(stoneObj, transform.position, Quaternion.identity);
             timeCount = 0;
         }
