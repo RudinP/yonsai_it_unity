@@ -6,10 +6,12 @@ public class Ball : MonoBehaviour
 {
     int jump;
     int maximum;
+    AudioSource jumpSound;
     void Start()
     {
         jump = 0;
         maximum = 2;
+        jumpSound = GetComponent<AudioSource>();
         Debug.Log("Start");
     }
 
@@ -31,11 +33,11 @@ public class Ball : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && jump>0)
         {
+            jumpSound.Play();
             Rigidbody ballRigid;
             ballRigid = gameObject.GetComponent<Rigidbody>();
             ballRigid.AddForce(Vector3.up * 300);
 
-            Debug.Log(ballRigid.mass);
             jump--;
         }
     }

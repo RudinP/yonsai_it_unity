@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,18 +6,35 @@ public class GameManager : MonoBehaviour
 {
     public int coinCount = 0;
     public Text coinText;
+    public Text clearText;
 
-    void GetCoin()
+    bool r;
+    public void GetCoin()
     {
         coinCount++;
         coinText.text = coinCount + "개";
-        Debug.Log("동전: " +  coinCount);
+        Debug.Log("동전: " + coinCount);
     }
-    public void RestartGame()
+    public void RestartGame(string t)
+    {
+        t += "\n Press R to Restart";
+        clearText.text = t;
+
+        r = true;
+
+        GameObject.Find("Main Camera").GetComponent<Camerawork>().ball = gameObject;
+        Destroy(GameObject.Find("Ball"));
+        Destroy(GameObject.Find("Stage"));
+        Destroy(GameObject.Find("FailZone"));
+        Destroy(GameObject.Find("ClearZone"));
+
+    }
+
+    void Restart()
     {
         SceneManager.LoadScene("Game");
     }
-    void RedCoinStart()
+    public void RedCoinStart()
     {
         DestroyObstacles();
     }
@@ -36,12 +51,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (r = true && Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
+
     }
 }

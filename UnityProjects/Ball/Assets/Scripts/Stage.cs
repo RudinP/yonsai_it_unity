@@ -15,6 +15,7 @@ public class Stage : MonoBehaviour
         //오일러각을 쓰게 되면 짐벌락 현상이 발생하기 때문에 쿼터니언을 사용해야 함.
         float xRot = Input.GetAxis("Vertical") * speed;
         float zRot = Input.GetAxis("Horizontal") * speed;
+
         transform.Rotate(new Vector3(xRot, 0, -zRot));
 
 

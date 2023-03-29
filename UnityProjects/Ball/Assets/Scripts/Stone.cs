@@ -5,10 +5,13 @@ using UnityEngine;
 public class Stone : MonoBehaviour
 {
     Vector3 target;
+    AudioSource stoneSource;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Ball").transform.position;
+        stoneSource = GetComponent<AudioSource>();
+        gameObject.transform.SetParent(GameObject.Find("Stage").transform);
     }
 
     // Update is called once per frame
@@ -22,8 +25,9 @@ public class Stone : MonoBehaviour
     {
         if (collider.gameObject.name == "Ball")
         {
+            stoneSource.Play();
             GameManager gmComponent = GameObject.Find("GameManager").GetComponent<GameManager>();
-            gmComponent.RestartGame();
+            gmComponent.RestartGame("");
         }
     }
 }

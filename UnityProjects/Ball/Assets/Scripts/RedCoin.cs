@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class RedCoin : MonoBehaviour
 {
+    AudioSource redCoinSource;
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.name == "Ball")
         {
-            GameObject.Find("GameManager").SendMessage("RedCoinStart");
-            Destroy(gameObject);
+            redCoinSource.Play();
+            GameObject.Find("GameManager").GetComponent<GameManager>().RedCoinStart();
+            Invoke("DestroySelf", 0.3f);
         }
+    }
+
+    void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        redCoinSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -11,13 +11,12 @@ public class FailZone : MonoBehaviour
         if (collider.gameObject.name == "Ball")
         {
             GameManager gmComponent = GameObject.Find("GameManager").GetComponent<GameManager>();
-            gmComponent.RestartGame();
+            gmComponent.RestartGame("Game Over");
         }
     }
 
     private void Update()
     {
-        GameManager gmComponent = GameObject.Find("GameManager").GetComponent<GameManager>();
-        //Debug.Log(gmComponent.coinCount);
+        
     }
 }
