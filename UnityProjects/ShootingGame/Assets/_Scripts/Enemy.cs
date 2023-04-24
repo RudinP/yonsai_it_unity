@@ -33,9 +33,7 @@ public class Enemy : MonoBehaviour
     {
         if (!collision.gameObject.tag.Equals("Player"))
         {
-            GameObject smObject = GameObject.Find("ScoreManager");
-            ScoreManager sm = smObject.GetComponent<ScoreManager>();
-            sm.AddScore();
+            ScoreManager.Instance.Score++;
         }
         
         GameObject explosion = Instantiate(explosionFactory);
