@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosionFactory;
 
-    private void Start()
+    private void OnEnable()
     {
         int randValue = Random.Range(0, 10);
 
@@ -39,7 +39,18 @@ public class Enemy : MonoBehaviour
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = transform.position;
 
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
+        if(collision.gameObject.tag == "Bullet")
+        {
+            collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+
+            PlayerFire playerFire = GameObject.FindWithTag("Player").GetComponent<PlayerFire>();
+            playerFire.bulletObjectPool.Add(collision.gameObject);
+        }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
+        
     }
 }

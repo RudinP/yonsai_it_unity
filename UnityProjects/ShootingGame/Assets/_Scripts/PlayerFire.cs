@@ -7,15 +7,33 @@ public class PlayerFire : MonoBehaviour
     public GameObject bulletFactory;
     public GameObject firePosition;
 
+    public int poolSize;
+    public List<GameObject> bulletObjectPool;
+
+    private void Start()
+    {
+        
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject bullet = Instantiate(bulletFactory);
+            bulletObjectPool.Add(bullet);
+            bullet.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject bullet = Instantiate(bulletFactory);
-            bullet.transform.position = firePosition.transform.position;
-            //== Instantiate(bulletFactory, firePosition.transform.position, Quaternion.identity);
-            
-            
+            if(bulletObjectPool.Count > 0)
+            {
+                GameObject bullet = bulletObjectPool[0];
+                bullet.SetActive(true);
+                bulletObjectPool.Remove(bullet);
+
+                bullet.transform.position = firePosition.transform.position;
+            }
+
         }
     }
 }
