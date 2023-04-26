@@ -23,17 +23,23 @@ public class PlayerFire : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
         if (Input.GetButtonDown("Fire1"))
         {
-            if(bulletObjectPool.Count > 0)
-            {
-                GameObject bullet = bulletObjectPool[0];
-                bullet.SetActive(true);
-                bulletObjectPool.Remove(bullet);
+            Fire();
+        }
+#endif
+    }
 
-                bullet.transform.position = firePosition.transform.position;
-            }
+    public void Fire()
+    {
+        if (bulletObjectPool.Count > 0)
+        {
+            GameObject bullet = bulletObjectPool[0];
+            bullet.SetActive(true);
+            bulletObjectPool.Remove(bullet);
 
+            bullet.transform.position = firePosition.transform.position;
         }
     }
 }

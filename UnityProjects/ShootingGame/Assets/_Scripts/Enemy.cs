@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             collision.gameObject.SetActive(false);
-            gameObject.SetActive(false);
 
             PlayerFire playerFire = GameObject.FindWithTag("Player").GetComponent<PlayerFire>();
             playerFire.bulletObjectPool.Add(collision.gameObject);
@@ -51,6 +50,12 @@ public class Enemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+
+        gameObject.SetActive(false);
+
+        GameObject emObject = GameObject.Find("EnemyManager");
+        EnemyManager enemyManager = emObject.GetComponent<EnemyManager>();
+        enemyManager.enemyObjectPool.Add(gameObject);
         
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -11,19 +12,19 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyFactory;
 
     public int poolSize;
-    GameObject[] enemyObjectPool;
+    public List<GameObject> enemyObjectPool;
     public Transform[] spawnPoints;
 
     private void Start()
     {
         createTime = Random.Range(minTime, maxTime);
 
-        enemyObjectPool = new GameObject[poolSize];
+        enemyObjectPool = new List<GameObject>();
 
         for (int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyFactory);
-            enemyObjectPool[i] = enemy;
+            enemyObjectPool.Add(enemy);
             enemy.SetActive(false);
         }
     }
@@ -33,16 +34,15 @@ public class EnemyManager : MonoBehaviour
         currentTime += Time.deltaTime;
         if (currentTime > createTime)
         {
-            for (int i = 0; i < poolSize; i++)
+            if(enemyObjectPool.Count > 0)
             {
-                GameObject enemy = enemyObjectPool[i];
-                if (!enemy.activeSelf)
-                {
-                    int index = Random.Range(0, spawnPoints.Length);
-                    enemy.transform.position = spawnPoints[index].transform.position;
-                    enemy.SetActive(true);
-                    break;
-                }
+                GameObject enemy = enemyObjectPool[0];
+                enemyObjectPool.Remove(enemy);
+
+                int index = Random.Range(0, spawnPoints.Length);
+                enemy.transform.position = spawnPoints[index].transform.position;
+
+                enemy.SetActive(true);
             }
 
             currentTime = 0;

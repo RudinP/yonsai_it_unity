@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID
+        GameObject.Find("Joystick canvas XYBZ").SetActive(true);
+#elif UNITY_EDITOR || UNITY_STANDALONE
+        Screen.SetResolution(640, 960, false);
+        GameObject.Find("Joystick canvas XYBZ").SetActive(false);
+#endif
         if (Instance == null) Instance = this;
         if (player == null) player = GameObject.FindWithTag("Player");
     }
