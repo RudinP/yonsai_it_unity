@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     public GameObject bulletFactory;
+    public GameObject bigBulletFactory;
     public GameObject firePosition;
 
     public int poolSize;
     public List<GameObject> bulletObjectPool;
+    public List<GameObject> bigBulletObjectPool;
 
     private void Start()
     {
@@ -18,6 +20,10 @@ public class PlayerFire : MonoBehaviour
             GameObject bullet = Instantiate(bulletFactory);
             bulletObjectPool.Add(bullet);
             bullet.SetActive(false);
+
+            GameObject bigBullet = Instantiate(bigBulletFactory);
+            bigBulletObjectPool.Add(bigBullet);
+            bigBullet.SetActive(false);
         }
     }
 
@@ -27,6 +33,10 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Fire();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            BigFire();
         }
 #endif
     }
@@ -40,6 +50,18 @@ public class PlayerFire : MonoBehaviour
             bulletObjectPool.Remove(bullet);
 
             bullet.transform.position = firePosition.transform.position;
+        }
+    }
+
+    public void BigFire()
+    {
+        if (bigBulletObjectPool.Count > 0)
+        {
+            GameObject bullet = bigBulletObjectPool[0];
+            bullet.SetActive(true);
+            bigBulletObjectPool.Remove(bullet);
+
+            bullet.transform .position = firePosition.transform.position;
         }
     }
 }

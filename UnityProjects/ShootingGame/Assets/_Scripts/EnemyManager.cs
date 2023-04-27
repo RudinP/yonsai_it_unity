@@ -9,11 +9,10 @@ public class EnemyManager : MonoBehaviour
     float minTime = 1;
     float maxTime = 2;
 
-    public GameObject enemyFactory;
+    public GameObject[] enemyFactory;
 
     public int poolSize;
     public List<GameObject> enemyObjectPool;
-    public Transform[] spawnPoints;
 
     private void Start()
     {
@@ -23,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject enemy = Instantiate(enemyFactory);
+            GameObject enemy = Instantiate(enemyFactory[i % 3]);
             enemyObjectPool.Add(enemy);
             enemy.SetActive(false);
         }
@@ -36,11 +35,11 @@ public class EnemyManager : MonoBehaviour
         {
             if(enemyObjectPool.Count > 0)
             {
-                GameObject enemy = enemyObjectPool[0];
+                GameObject enemy = enemyObjectPool[Random.Range(0, enemyObjectPool.Count)];
                 enemyObjectPool.Remove(enemy);
 
-                int index = Random.Range(0, spawnPoints.Length);
-                enemy.transform.position = spawnPoints[index].transform.position;
+                int x = Random.Range(-4, 3) + 1;
+                enemy.transform.position = new Vector3(x, 10, 0);
 
                 enemy.SetActive(true);
             }
@@ -49,4 +48,5 @@ public class EnemyManager : MonoBehaviour
             createTime = Random.Range(minTime, maxTime);
         }
     }
+
 }
