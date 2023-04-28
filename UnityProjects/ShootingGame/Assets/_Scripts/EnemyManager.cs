@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour
                 GameObject enemy = enemyObjectPool[Random.Range(0, enemyObjectPool.Count)];
                 enemyObjectPool.Remove(enemy);
 
-                int x = Random.Range(-4, 3) + 1;
+                float x = Random.Range(-3f, 3f);
                 enemy.transform.position = new Vector3(x, 10, 0);
 
                 enemy.SetActive(true);
