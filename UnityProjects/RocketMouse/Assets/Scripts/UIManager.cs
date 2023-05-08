@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public Animator startButton;
+    public Animator settingsButton;
+    public Animator dialog;
 
     public void StartGame()
     {
         SceneManager.LoadScene("Main");
     }
     
-    public void OpenSettings()
+    public void OpenCloseSettings(bool isOpen)
     {
-        startButton.SetBool("isHidden", true);
+        startButton.SetBool("isHidden", isOpen);
+        settingsButton.SetBool("isHidden", isOpen);
+        dialog.SetBool("isHidden", !isOpen);
     }
 }
