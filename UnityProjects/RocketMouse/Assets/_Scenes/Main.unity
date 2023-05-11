@@ -221,6 +221,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1303956925}
+--- !u!1 &1000138951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000138952}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1000138952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000138951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1303956930}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303956925
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +264,7 @@ GameObject:
   - component: {fileID: 1303956929}
   - component: {fileID: 1303956928}
   - component: {fileID: 1303956927}
+  - component: {fileID: 1303956932}
   - component: {fileID: 1303956926}
   - component: {fileID: 1303956931}
   m_Layer: 0
@@ -256,6 +288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jetpackForce: 75
   forwardMovementSpeed: 3
+  groundCheckTransform: {fileID: 1000138952}
+  groundCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!58 &1303956927
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -358,6 +394,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1938198535}
+  - {fileID: 1000138952}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -375,8 +412,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableRooms:
   - {fileID: 5087982541490255293, guid: 862e60791c93d024dbe4e32af0207707, type: 3}
+  - {fileID: 768324421101698568, guid: 49e72199db5eada48b98ba4a10007183, type: 3}
+  - {fileID: 1169420352474632245, guid: ef0cb385e1a166048bacd1f7897d5fbe, type: 3}
   currentRooms:
   - {fileID: 1435691928}
+--- !u!95 &1303956932
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303956925}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e8b19a127cde9d4ab22082b31a58f00, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1435691928 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5087982541490255293, guid: 862e60791c93d024dbe4e32af0207707, type: 3}
@@ -5248,6 +5308,10 @@ PrefabInstance:
     - target: {fileID: 5087982541490255293, guid: 862e60791c93d024dbe4e32af0207707, type: 3}
       propertyPath: m_Name
       value: Room1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5087982543226906303, guid: 862e60791c93d024dbe4e32af0207707, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 862e60791c93d024dbe4e32af0207707, type: 3}

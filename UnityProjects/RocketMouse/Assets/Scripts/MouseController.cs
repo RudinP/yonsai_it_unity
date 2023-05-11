@@ -8,9 +8,16 @@ public class MouseController : MonoBehaviour
     private Rigidbody2D rb;
     public float forwardMovementSpeed;
 
+    public Transform groundCheckTransform;
+    public LayerMask groundCheckLayerMask;
+    private bool grounded;
+
+    private Animator animator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator= GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -25,5 +32,18 @@ public class MouseController : MonoBehaviour
         Vector2 newVelocity = rb.velocity;
         newVelocity.x = forwardMovementSpeed;
         rb.velocity = newVelocity;
+
+        UpdateGroundedStatus();
+    }
+
+    private void UpdateGroundedStatus()
+    {
+        grounded = Physics2D.OverlapCircle(
+            groundCheckTransform.position,
+            .1f,
+            groundCheckLayerMask);
+
+        Debug.Log(grounded);
+        animator.SetBool("grounded", grounded);
     }
 }
