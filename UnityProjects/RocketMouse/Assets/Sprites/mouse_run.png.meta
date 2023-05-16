@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1261a953340b3984986dc5561e7791ba
+guid: 87a1568aa5372af4b8063c0981fcf471
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -114,31 +114,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -156,19 +132,19 @@ TextureImporter:
       name: mouse_run_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
         width: 162
         height: 156
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fd85ea35932a9c4e9c69265f09a0d9b
-      internalID: 1591478169
+      spriteID: 14e449a0176f61f4891e8a70218732a7
+      internalID: 1781087510
       vertices: []
       indices: 
       edges: []
@@ -177,19 +153,19 @@ TextureImporter:
       name: mouse_run_1
       rect:
         serializedVersion: 2
-        x: 162
+        x: 163
         y: 0
         width: 162
         height: 156
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c9dbe9eb7ede434ba393104ba0b9672
-      internalID: -1442979270
+      spriteID: f4717695e99b49c4b86ae1967e2411e3
+      internalID: -429190099
       vertices: []
       indices: 
       edges: []
@@ -203,14 +179,14 @@ TextureImporter:
         width: 162
         height: 156
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e6b4547efca62941abfa2f8e8322bb0
-      internalID: 1391761439
+      spriteID: d97e78e9597e74046986536c88f30a08
+      internalID: -950642198
       vertices: []
       indices: 
       edges: []
@@ -224,14 +200,14 @@ TextureImporter:
         width: 162
         height: 156
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03f6a33d264c22843affe9f335812006
-      internalID: -773886874
+      spriteID: cfeb93e5b469f8a41a0659e8a4102f25
+      internalID: 2147470328
       vertices: []
       indices: 
       edges: []
@@ -247,10 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      mouse_run_0: 1591478169
-      mouse_run_1: -1442979270
-      mouse_run_2: 1391761439
-      mouse_run_3: -773886874
+      mouse_run_0: 1781087510
+      mouse_run_1: -429190099
+      mouse_run_2: -950642198
+      mouse_run_3: 2147470328
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
