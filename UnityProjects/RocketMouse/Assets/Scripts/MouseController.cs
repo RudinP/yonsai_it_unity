@@ -29,8 +29,12 @@ public class MouseController : MonoBehaviour
     public AudioSource jetpackAudio;
     public AudioSource footstepsAudio;
 
+    public ParallaxScroll parallaxScroll;
+
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         textCoins.text = coins.ToString();
@@ -38,7 +42,7 @@ public class MouseController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool jetpackActive = Input.GetButton("Fire1");
+        bool jetpackActive = Input.GetButton("Fire1") || Input.GetMouseButton(0);
 
         jetpackActive = jetpackActive && !dead;
         if (jetpackActive)
@@ -57,6 +61,8 @@ public class MouseController : MonoBehaviour
         AdjustJetpack(jetpackActive);
         DisplayRestartButton();
         AdjustFootstepsAndJetpackSound(jetpackActive);
+
+        parallaxScroll.offset = transform.position.x;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
