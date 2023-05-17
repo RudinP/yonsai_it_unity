@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
     public GameObject mouse;
     public Text levelTxt;
+    public AudioSource music;
+
     public int level { get; private set; }
     public float speedPerLv;
 
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         level = 1;
+        music.volume = PlayerPrefs.GetFloat("Volume");
         StartCoroutine("LevelUp");
     }
     private void Update()
