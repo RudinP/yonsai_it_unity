@@ -24,6 +24,7 @@ public class MouseController : MonoBehaviour
     private uint coins = 0;
 
     public Button buttonRestart;
+    public Button buttonMenu;
 
     public AudioClip coinCollectSound;
     public AudioSource jetpackAudio;
@@ -129,14 +130,22 @@ public class MouseController : MonoBehaviour
 
     private void DisplayRestartButton()
     {
-        bool active = buttonRestart.gameObject.activeSelf;
+        bool active = buttonRestart.gameObject.activeSelf && buttonMenu.gameObject.activeSelf;
         if (grounded && dead && !active)
+        {
             buttonRestart.gameObject.SetActive(true);
+            buttonMenu.gameObject.SetActive(true);
+        }
     }
 
     public void OnClickedRestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnClickedToMenuButton()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     private void AdjustFootstepsAndJetpackSound(bool jetpackActive)
