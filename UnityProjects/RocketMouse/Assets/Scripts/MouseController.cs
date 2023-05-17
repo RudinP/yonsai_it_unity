@@ -18,7 +18,7 @@ public class MouseController : MonoBehaviour
 
     public ParticleSystem jetpack;
 
-    private bool dead = false;
+    public bool dead { get; private set; } = false;
 
     public Text textCoins;
     private uint coins = 0;

@@ -114,7 +114,10 @@ public class GeneratorScript : MonoBehaviour
     private void AddObject(float lastObjectX)
     {
         // 랜덤으로 생성할 오브젝트의 인덱스 구함
-        int randomIndex = Random.Range(0, availableObjects.Length);
+        int randomIndex;
+        if (GameManager.instance.isFever)
+            randomIndex = Random.Range(1, availableObjects.Length - 1);
+        else randomIndex = Random.Range(0, availableObjects.Length);
         // 오브젝트를 생성하고 obj변수에 생성된 오브젝트를 저장
         GameObject obj = Instantiate(availableObjects[randomIndex]);
         // 오브젝트를 배치할 위치를 가장 오른쪽에 위치한 오브젝트로부터 구함
