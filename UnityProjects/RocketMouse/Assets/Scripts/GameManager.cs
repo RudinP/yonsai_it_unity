@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +18,22 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         level = 1;
-        music.volume = PlayerPrefs.GetFloat("Volume");
+
+        SetVolume(PlayerPrefs.GetFloat("Volume"));
+
         StartCoroutine("LevelUp");
     }
     private void Update()
     {
         levelTxt.text = "Lv." + level;        
+    }
+
+    private void SetVolume(float vol)
+    {
+        music.volume = vol;
+
+        List<AudioSource> musics = mouse.GetComponents<AudioSource>().ToList();
+        musics.ForEach(a => a.volume = vol);
     }
 
     IEnumerator LevelUp()

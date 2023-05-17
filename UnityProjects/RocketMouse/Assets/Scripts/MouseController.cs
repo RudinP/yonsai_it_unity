@@ -86,12 +86,13 @@ public class MouseController : MonoBehaviour
 
         textCoins.text = coins.ToString();
 
-        AudioSource.PlayClipAtPoint(coinCollectSound, transform.position);
+        if(PlayerPrefs.GetFloat("Volume") != 0)
+            AudioSource.PlayClipAtPoint(coinCollectSound, transform.position);
     }
 
     private void HitByLaser(Collider2D laserCollider)
     {
-        if (!dead)
+        if (!dead && PlayerPrefs.GetFloat("Volume") != 0)
         {
             AudioSource laser = laserCollider.GetComponent<AudioSource>();
             laser.Play();
