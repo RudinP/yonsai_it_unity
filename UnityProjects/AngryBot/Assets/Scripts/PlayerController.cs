@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float walkSpeed;
     public float runSpeed;
+    public float hp;
 
     private Animation anim;
     public AnimationClip idleAni;
@@ -49,24 +50,26 @@ public class PlayerController : MonoBehaviour
         float xx = Input.GetAxis("Horizontal");
         float zz = Input.GetAxis("Vertical");
 
-        if (xx != 0 || zz != 0)
+        if(playerState != PlayerState.Attack)
         {
-            lookDirection = (xx * Vector3.right) + (zz * Vector3.forward);
-            speed = walkSpeed;
-            playerState = PlayerState.Walk;
-
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (xx != 0 || zz != 0)
             {
-                speed = runSpeed;
-                playerState = PlayerState.Run;
+                lookDirection = (xx * Vector3.right) + (zz * Vector3.forward);
+                speed = walkSpeed;
+                playerState = PlayerState.Walk;
+
+                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                {
+                    speed = runSpeed;
+                    playerState = PlayerState.Run;
+                }
+            }
+            else if (xx == 0 && zz == 0 && playerState != PlayerState.Idle)
+            {
+                playerState = PlayerState.Idle;
+                speed = 0.0f;
             }
         }
-        else if (xx == 0 && zz == 0 && playerState != PlayerState.Idle)
-        {
-            playerState = PlayerState.Idle;
-            speed = 0.0f;
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) && playerState != PlayerState.Dead)
             StartCoroutine(nameof(Shot));
     }
@@ -86,8 +89,15 @@ public class PlayerController : MonoBehaviour
         audioSrc.Play();
 
         shotFx.SetActive(true);
+
+        playerState = PlayerState.Attack;
+        speed = 0.0f;
+
         yield return new WaitForSeconds(0.15f);
         shotFx.SetActive(false);
+
+        yield return new WaitForSeconds(0.15f);
+        playerState = PlayerState.Idle;
     }
     void LookUpdate()
     {
