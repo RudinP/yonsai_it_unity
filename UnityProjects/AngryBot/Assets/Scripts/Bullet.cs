@@ -22,4 +22,18 @@ public class Bullet : MonoBehaviour
         */
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy (gameObject);
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+
+            if (enemy.enemyState != EnemyState.Die)
+                enemy.Hurt(power);
+        }
+    }
 }

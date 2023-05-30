@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerState
 {
@@ -31,6 +32,9 @@ public class PlayerController : MonoBehaviour
     public Transform shotPoint;
     public GameObject shotFx;
 
+    public Slider lifeBar;
+    public float maxHp;
+
     private void Start()
     {
         anim = GetComponent<Animation>();
@@ -39,8 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        KeyboardInput();
-        LookUpdate();
+        if(playerState != PlayerState.Dead)
+        {
+            KeyboardInput();
+            LookUpdate();
+        }
 
         AnimationUpdate();
     }
@@ -126,6 +133,21 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Dead:
                 anim.CrossFade(idleAni.name, 0.2f);
                 break;
+        }
+    }
+
+    public void Hurt(float damage)
+    {
+        if(hp > 0)
+        {
+            hp -= damage;
+            lifeBar.value = hp / maxHp;
+        }
+        
+        if (hp <= 0)
+        {
+            speed = 0;
+            playerState = PlayerState.Dead;
         }
     }
 }

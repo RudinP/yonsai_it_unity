@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum EnemyState
 {
@@ -25,8 +26,21 @@ public class Enemy : MonoBehaviour
     public float damage;
     public Transform player;
 
+    private AudioSource audioSrc;
+    public Transform fxPoint;
+    public GameObject hitFx;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
+
+    public GameObject guiPivot;
+    public Slider lifeBar;
+    public float maxHp;
+    public float hp;
+
     private void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
+
         player = GameObject.Find("Player").transform;
         anim = GetComponent<Animator>();
     }
@@ -41,7 +55,7 @@ public class Enemy : MonoBehaviour
             AttackRangeCheck();
         }
     }
-    
+
     private void AttackRangeCheck()
     {
         if (Vector3.Distance(player.position, transform.position) < 1.5f
@@ -75,5 +89,46 @@ public class Enemy : MonoBehaviour
             - transform.position);
 
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    public void AttackOn()
+    {
+        PlayerController pc = player.GetComponent<PlayerController>();
+        pc.Hurt(damage);
+    }
+
+    public void Hurt(float damage)
+    {
+        if (hp > 0)
+        {
+            enemyState = EnemyState.Hurt;
+            speed = 0;
+            anim.SetTrigger("hurt");
+
+            GameObject fx = Instantiate(
+                hitFx, fxPoint.position, Quaternion.LookRotation(fxPoint.forward));
+
+            hp -= damage;
+            lifeBar.value = hp / maxHp;
+
+            audioSrc.clip = hitSound;
+            audioSrc.Play();
+        }
+
+        if ( hp < 0 )
+        {
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        enemyState = EnemyState.Die;
+        anim.SetTrigger("die");
+        speed = 0;
+
+        guiPivot.gameObject.SetActive(false);
+        audioSrc.clip = deathSound;
+        audioSrc.Play();
     }
 }
