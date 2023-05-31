@@ -148,6 +148,9 @@ public class PlayerController : MonoBehaviour
         {
             speed = 0;
             playerState = PlayerState.Dead;
+
+            PlayManager pm = GameObject.Find("PlayManager").GetComponent<PlayManager>();
+            pm.GameOver();
         }
     }
 }
