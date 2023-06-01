@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayManager : MonoBehaviour
@@ -16,10 +17,14 @@ public class PlayManager : MonoBehaviour
     public Text finalMessage;
     public Text finalScoreLabel;
 
+    public Text PlayerName;
+
     private void Start()
     {
         enemyLabel.text = string.Format("Enemy : {0}", enemyCount);
         timeLabel.text = string.Format("Time {0:N2}", limitTime);
+
+        PlayerName.text = PlayerPrefs.GetString("UserName");
     }
 
     private void Update()
@@ -49,7 +54,9 @@ public class PlayManager : MonoBehaviour
             PlayerController pc = GameObject.Find("Player").GetComponent<PlayerController>();
             float score = 12345f + limitTime * 123f + pc.hp * 123f;
             finalScoreLabel.text = string.Format("{0:N0}", score);
-            
+
+            BestCheck(score);
+
             finalGUI.SetActive(true);
         }
     }
@@ -74,8 +81,34 @@ public class PlayManager : MonoBehaviour
             finalScoreLabel.text = string.Format("{0:N0}", score);
             finalGUI.SetActive(true) ;
 
+            BestCheck(score);
+
             PlayerController pc = GameObject.Find("Player").GetComponent<PlayerController>();
             pc.playerState = PlayerState.Dead;
+        }
+    }
+
+    public void Replay()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("MainPlay");
+    }
+
+    public void Quit()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Title");
+    }
+
+    private void BestCheck(float score)
+    {
+        float bestScore = PlayerPrefs.GetFloat("BestScore");
+
+        if(score > bestScore)
+        {
+            PlayerPrefs.SetFloat("BestScore", score);
+            PlayerPrefs.SetString("BestPlayer", PlayerPrefs.GetString("UserName"));
+            PlayerPrefs.Save();
         }
     }
 }
