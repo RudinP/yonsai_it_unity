@@ -27629,7 +27629,7 @@ MonoBehaviour:
   finalGUI: {fileID: 1994155942}
   finalMessage: {fileID: 607839102}
   finalScoreLabel: {fileID: 1104069338}
-  PlayerName: {fileID: 1496414215}
+  playerName: {fileID: 1496414215}
 --- !u!4 &1445676060
 Transform:
   m_ObjectHideFlags: 0
@@ -32650,6 +32650,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 975597798, guid: 0cb166872f473b1479c380f5d46e67e6, type: 3}
+      propertyPath: leftWalkAni
+      value: 
+      objectReference: {fileID: 7400038, guid: df1f47a0a2effe74488d5da197295a19, type: 3}
+    - target: {fileID: 975597798, guid: 0cb166872f473b1479c380f5d46e67e6, type: 3}
+      propertyPath: rightWalkAni
+      value: 
+      objectReference: {fileID: 7400036, guid: df1f47a0a2effe74488d5da197295a19, type: 3}
     - target: {fileID: 975597804, guid: 0cb166872f473b1479c380f5d46e67e6, type: 3}
       propertyPath: cursor
       value: 

@@ -12,6 +12,9 @@ public class TitleManager : MonoBehaviour
 
     public void GoPlay()
     {
+        if (string.IsNullOrEmpty(nameInput.text))
+            return;
+
         PlayerPrefs.SetString("UserName", nameInput.text);
         PlayerPrefs.Save();
         SceneManager.LoadScene("MainPlay");
@@ -19,13 +22,30 @@ public class TitleManager : MonoBehaviour
 
     public void BestScore()
     {
-        bestUserData.text = string.Format(
-            "{0}:{1:N0}",
-            PlayerPrefs.GetString("BestPlayer"),
-            PlayerPrefs.GetFloat("BestScore"));
-
-        if (PlayerPrefs.HasKey("BestPlayer"))
+        NameScore[] rank = LoadRank();
+        bestUserData.text = "";
+        for (int i = 0; i < rank.Length; i++)
+        {
+            bestUserData.text += string.Format(
+                "{0}. {1}:{2:N0}\n",
+                i + 1,
+                PlayerPrefs.GetString("BestPlayer" + (i + 1)),
+                PlayerPrefs.GetFloat("BestScore" + (i + 1)));
+        }
+        if (PlayerPrefs.HasKey("BestPlayer1"))
             bestData.SetActive(true);
+    }
+
+    NameScore[] LoadRank()
+    {
+        NameScore[] rankArr = new NameScore[3];
+        for (int i = 0; i < rankArr.Length; i++)
+        {
+            rankArr[i] = new NameScore();
+            rankArr[i].name = PlayerPrefs.GetString("BestPlayer" + (i + 1));
+            rankArr[i].score = PlayerPrefs.GetFloat("BestScore" + (i + 1));
+        }
+        return rankArr;
     }
 
     public void QuitGame()

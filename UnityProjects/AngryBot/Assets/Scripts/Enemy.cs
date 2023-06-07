@@ -9,7 +9,7 @@ public enum EnemyState
     Move,
     Attack,
     Hurt,
-    Die
+    Die,
 }
 
 public class Enemy : MonoBehaviour
@@ -17,10 +17,9 @@ public class Enemy : MonoBehaviour
     public EnemyState enemyState;
 
     public Animator anim;
-    
+
     private float speed;
     public float moveSpeed;
-    public float attackSpeed;
 
     public float findRange;
     public float damage;
@@ -40,9 +39,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         audioSrc = GetComponent<AudioSource>();
-
-        player = GameObject.Find("Player").transform;
-        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -50,7 +46,7 @@ public class Enemy : MonoBehaviour
         if (enemyState == EnemyState.Idle)
             DistanceCheck();
         else if (enemyState == EnemyState.Move)
-        { 
+        {
             MoveUpdate();
             AttackRangeCheck();
         }
@@ -66,8 +62,12 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("attack");
         }
     }
+
     private void DistanceCheck()
     {
+        if (enemyState == EnemyState.Die)
+            return;
+
         if (Vector3.Distance(player.position, transform.position) >= findRange)
         {
             enemyState = EnemyState.Idle;
@@ -115,14 +115,14 @@ public class Enemy : MonoBehaviour
             audioSrc.Play();
         }
 
-        if ( hp < 0 )
-        {
+        if (hp <= 0)
             Death();
-        }
     }
 
     public void Death()
     {
+        GetComponent<Collider>().enabled = false;
+
         enemyState = EnemyState.Die;
         anim.SetTrigger("die");
         speed = 0;

@@ -12,10 +12,12 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject, life);
     }
+
     private void Update()
     {
-        /*life -= Time.deltaTime;
-        if(life <= 0.0f)
+        /*
+        life -= Time.deltaTime;
+        if (life < 0.0f)
         {
             Destroy(gameObject);
         }
@@ -23,17 +25,19 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy (gameObject);
+
+        Destroy(gameObject);
 
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
             if (enemy.enemyState != EnemyState.Die)
+            {
                 enemy.Hurt(power);
+            }
         }
     }
 }
