@@ -21,7 +21,7 @@ public class Sense : MonoBehaviour
     private void Update()
     {
         elapsedTime += Time.deltaTime;
-        if(elapsedTime > detectionRate)
+        if (elapsedTime > detectionRate)
         {
             UpdateSense();
             elapsedTime = 0f;

@@ -28,7 +28,7 @@ public class Wonder : MonoBehaviour
         transform.Translate(new Vector3(0, 0, movementSpeed * Time.deltaTime));
     }
 
-    private void GetNextPosition()
+    void GetNextPosition()
     {
         tarPos = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
     }
