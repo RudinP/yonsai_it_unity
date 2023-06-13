@@ -23,14 +23,13 @@ public class TankAi : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        animator = GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         pointA = GameObject.Find("P1").transform;
         pointB = GameObject.Find("P2").transform;
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        waypoints = new Transform[2] { pointA, pointB};
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        waypoints = new Transform[2] { pointA, pointB };
         currentTarget = 0;
         navMeshAgent.SetDestination(waypoints[currentTarget].position);
-
     }
 
     private void FixedUpdate()
@@ -40,7 +39,7 @@ public class TankAi : MonoBehaviour
 
         checkDirection = player.transform.position - transform.position;
         ray = new Ray(transform.position, checkDirection);
-        if(Physics.Raycast(ray, out hit, maxDistanceToCheck))
+        if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
         {
             if (hit.collider.gameObject == player)
                 animator.SetBool("isPlayerVisible", true);
@@ -51,8 +50,30 @@ public class TankAi : MonoBehaviour
         {
             animator.SetBool("isPlayerVisible", false);
         }
+        
+        distanceFromTarget =
+            Vector3.Distance(waypoints[currentTarget].position, transform.position);
+        animator.SetFloat("distanceFromWaypoint", distanceFromTarget);
+    }
 
-        distanceFromTarget = Vector3.Distance(waypoints[currentTarget].position, transform.position);
-        animator.SetFloat("distanceFromWayPoint", distanceFromTarget);
+    public void SetNextPoint()
+    {
+        switch (currentTarget)
+        {
+            case 0:
+                currentTarget = 1;
+                break;
+            case 1:
+                currentTarget = 0;
+                break;
+        }
+        navMeshAgent.SetDestination(waypoints[currentTarget].position);
+    }
+
+    public void ChasePlayer()
+    {
+        navMeshAgent.SetDestination(player.transform.position);
     }
 }
+
+
