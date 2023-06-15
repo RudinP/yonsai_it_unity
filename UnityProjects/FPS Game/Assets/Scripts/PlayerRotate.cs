@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    public float rotSpeed = 100f;
+    public float rotSpeed = 200f;
 
     float mx = 0;
 
@@ -15,6 +15,5 @@ public class PlayerRotate : MonoBehaviour
         mx += mouse_X * rotSpeed * Time.deltaTime;
 
         transform.eulerAngles = new Vector3(0, mx, 0);
-
     }
 }

@@ -9,11 +9,17 @@ public class PlayerMove : MonoBehaviour
     CharacterController cc;
 
     float gravity = -20;
-    float yVelocity = 0;
+    public float yVelocity = 0;
+
+    public float jumpPower = 10f;
+    public bool isJumping = false;
+
+    public int hp = 20;
+    public int maxHp = 20;
 
     private void Start()
     {
-        cc = GetComponent<CharacterController>();    
+        cc = GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -23,15 +29,32 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v);
         dir = dir.normalized;
+        //dir.Normalize();
 
-        //바라보는 방향으로 이동
         dir = Camera.main.transform.TransformDirection(dir);
 
-        //transform.position += dir * moveSpeed * Time.deltaTime;
+        if (isJumping && cc.collisionFlags == CollisionFlags.Below)
+        {
+            isJumping = false;
+            yVelocity = 0;
+        }
+
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
+            yVelocity = jumpPower;
+            isJumping = true;
+        }
 
         yVelocity += gravity * Time.deltaTime;
         dir.y = yVelocity;
 
         cc.Move(dir * moveSpeed * Time.deltaTime);
     }
+
+    public void DamageAction(int damage)
+    {
+        hp -= damage;
+        print("HP : " + hp);
+    }
 }
+
