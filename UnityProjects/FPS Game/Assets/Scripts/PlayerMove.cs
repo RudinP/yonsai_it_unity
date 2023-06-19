@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class PlayerMove : MonoBehaviour
 
     public int hp = 20;
     public int maxHp = 20;
+
+    public Slider hpSlider;
+
+    public GameObject hit;
 
     private void Start()
     {
@@ -49,12 +54,27 @@ public class PlayerMove : MonoBehaviour
         dir.y = yVelocity;
 
         cc.Move(dir * moveSpeed * Time.deltaTime);
+
+        hpSlider.value = (float)hp / maxHp;
     }
 
     public void DamageAction(int damage)
     {
         hp -= damage;
-        print("HP : " + hp);
+        
+        if(hp > 0)
+        {
+            StartCoroutine(PlayHitEffect());
+        }
+    }
+
+    IEnumerator PlayHitEffect()
+    {
+        hit.SetActive(true);
+
+        yield return new WaitForSeconds(.3f);
+
+        hit.SetActive(false);
     }
 }
 

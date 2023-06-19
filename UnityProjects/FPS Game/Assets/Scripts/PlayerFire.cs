@@ -10,6 +10,7 @@ public class PlayerFire : MonoBehaviour
 
     public GameObject bulletEffect;
     ParticleSystem ps;
+    public int weaponPower = 5;
 
     private void Start()
     {
@@ -34,8 +35,16 @@ public class PlayerFire : MonoBehaviour
             
             if (Physics.Raycast(ray, out hitInfo))
             {
-                bulletEffect.transform.position = hitInfo.point;
-                bulletEffect.transform.forward = hitInfo.normal;
+                if(hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
+                    eFSM.HitEnemy(weaponPower);
+                }
+                else
+                {
+                    bulletEffect.transform.position = hitInfo.point;
+                    bulletEffect.transform.forward = hitInfo.normal;
+                }
                 ps.Play();
             }
         }
