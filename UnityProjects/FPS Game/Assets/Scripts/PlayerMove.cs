@@ -29,6 +29,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.gm.gState != GameManager.GameState.Run)
+            return;
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
