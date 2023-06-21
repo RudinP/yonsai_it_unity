@@ -77,6 +77,10 @@ public class EnemyFSM : MonoBehaviour
         {
             m_State = EnemyState.Attack;
             print("상태 전환 : Move -> Attack");
+
+            currentTime = attackDelay;
+            
+            anim.SetTrigger("MoveToAttackDelay");
         }
     }
 
@@ -87,9 +91,11 @@ public class EnemyFSM : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime > attackDelay)
             {
-                player.GetComponent<PlayerMove>().DamageAction(attackPower);
+                //player.GetComponent<PlayerMove>().DamageAction(attackPower);
                 print("공격");
                 currentTime = 0;
+
+                anim.SetTrigger("StartAttack");
             }
         }
         else
@@ -97,7 +103,14 @@ public class EnemyFSM : MonoBehaviour
             m_State = EnemyState.Move;
             print("상태 전환 : Attack -> Move");
             currentTime = 0;
+
+            anim.SetTrigger("AttackToMove");
         }
+    }
+
+    public void AttackAction()
+    {
+        player.GetComponent<PlayerMove>().DamageAction(attackPower);
     }
 
     void Return()
@@ -106,7 +119,9 @@ public class EnemyFSM : MonoBehaviour
         {
             Vector3 dir = (originPos - transform.position).normalized;
             cc.Move(dir * moveSpeed * Time.deltaTime);
-
+            
+            dir.y = 0;
+            
             transform.forward = dir;
         }
         else
@@ -137,12 +152,15 @@ public class EnemyFSM : MonoBehaviour
         {
             m_State = EnemyState.Damaged;
             print("상태 전환 : Any state -> Damaged");
+
+            anim.SetTrigger("Damaged");
             Damaged();
         }
         else
         {
             m_State = EnemyState.Die;
             print("상태 전환 : Any state -> Die");
+            anim.SetTrigger("Die");
             Die();
         }
     }
@@ -154,7 +172,7 @@ public class EnemyFSM : MonoBehaviour
 
     IEnumerator DamageProcess()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         m_State = EnemyState.Move;
         print("상태 전환 : Damaged -> Move");
