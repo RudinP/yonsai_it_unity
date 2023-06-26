@@ -17,10 +17,9 @@ public class PlayerMove : MonoBehaviour
 
     public int hp = 20;
     public int maxHp = 20;
-
     public Slider hpSlider;
 
-    public GameObject hit;
+    public GameObject hitEffect;
 
     Animator anim;
 
@@ -41,6 +40,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 dir = new Vector3(h, 0, v);
         dir = dir.normalized;
         //dir.Normalize();
+
         anim.SetFloat("MoveMotion", dir.magnitude);
 
         dir = Camera.main.transform.TransformDirection(dir);
@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
     {
         hp -= damage;
         
-        if(hp > 0)
+        if (hp > 0)
         {
             StartCoroutine(PlayHitEffect());
         }
@@ -77,11 +77,11 @@ public class PlayerMove : MonoBehaviour
 
     IEnumerator PlayHitEffect()
     {
-        hit.SetActive(true);
+        hitEffect.SetActive(true);
 
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(0.3f);
 
-        hit.SetActive(false);
+        hitEffect.SetActive(false);
     }
 }
 

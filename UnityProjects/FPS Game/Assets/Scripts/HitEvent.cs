@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HitEvent : MonoBehaviour
 {
-    public EnemyFSM efsm;
+    public EnemyFSM eFsm;
 
     public void PlayerHit()
     {
-        efsm.AttackAction();
+        eFsm.AttackAction();
     }
 }
