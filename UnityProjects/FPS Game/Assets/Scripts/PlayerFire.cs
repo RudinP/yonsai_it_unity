@@ -133,6 +133,8 @@ public class PlayerFire : MonoBehaviour
             weapon02.SetActive(true);
             crosshair01.SetActive(false);
             crosshair02.SetActive(true);
+            weapon01_R.SetActive(false);
+            weapon02_R.SetActive(true);
         }
     }
 
