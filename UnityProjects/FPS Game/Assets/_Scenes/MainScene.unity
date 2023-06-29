@@ -17815,6 +17815,8 @@ MonoBehaviour:
   gState: 0
   gameLabel: {fileID: 313243293}
   gameOption: {fileID: 498583647}
+  killTxt: {fileID: 747372379}
+  killCount: 0
 --- !u!4 &988835568
 Transform:
   m_ObjectHideFlags: 0

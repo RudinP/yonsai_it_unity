@@ -92,7 +92,13 @@ public class PlayerFire : MonoBehaviour
             
             if (Physics.Raycast(ray, out hitInfo))
             {
-                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                if(hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("EnemyHead"))
+                {
+                    EnemyFSM eFSM = hitInfo.transform.parent.parent.GetComponent<EnemyFSM>();
+                    eFSM.HitEnemy(eFSM.hp);
+                    Debug.Log("HeadShot!");
+                }
+                else if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
                     EnemyFSM eFSM = hitInfo.transform.GetComponent<EnemyFSM>();
                     eFSM.HitEnemy(weaponPower);
