@@ -34,6 +34,10 @@ public class GameManager : MonoBehaviour
 
     public int killCount;
 
+    public GameObject hpAlert;
+
+    bool isAlertOn;
+
     private void Start()
     {
         Application.targetFrameRate = 60;
@@ -51,12 +55,22 @@ public class GameManager : MonoBehaviour
         killCount = 0;
 
         killTxt.text = "Kill: " + killCount;
+        isAlertOn = false;
     }
 
     private void Update()
     {
+        if(!isAlertOn)
+            if ((float)player.hp / player.maxHp * 100 <= 15)
+            {
+                Debug.Log($"{player.hp} / {player.maxHp}");
+                StartCoroutine(HpAlert());
+                isAlertOn = true;
+            }
+
         if (player.hp <= 0)
         {
+            StopCoroutine(HpAlert());
             player.GetComponentInChildren<Animator>().SetFloat("MoveMotion", 0);
 
             gameLabel.SetActive(true);
@@ -79,6 +93,15 @@ public class GameManager : MonoBehaviour
         gameLabel.SetActive(false);
 
         gState = GameState.Run;
+    }
+
+    IEnumerator HpAlert()
+    {
+        hpAlert.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hpAlert.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(HpAlert());
     }
 
     public void OpenOptionWindow()
