@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOption;
 
+    public Text killTxt;
+
+    public int killCount;
+
     private void Start()
     {
         Application.targetFrameRate = 60;
@@ -43,6 +47,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ReadyToStart());
 
         player = GameObject.Find("Player").GetComponent<PlayerMove>();
+
+        killCount = 0;
+
+        killTxt.text = "Kill: " + killCount;
     }
 
     private void Update()
@@ -60,6 +68,7 @@ public class GameManager : MonoBehaviour
 
             gState = GameState.GameOver;
         }
+        killTxt.text = "Kill: " + killCount;
     }
 
     IEnumerator ReadyToStart()

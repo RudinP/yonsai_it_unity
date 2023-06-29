@@ -233,6 +233,7 @@ public class EnemyFSM : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         print("¼Ò¸ê!");
+        GameManager.gm.killCount++;
         Destroy(gameObject);
     }
 }
